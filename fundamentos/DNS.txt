@@ -1,0 +1,395 @@
+# ============================== DNS ==============================
+
+# O que é DNS
+
+DNS significa:
+
+Domain Name System
+
+É o sistema responsável por transformar domínios em IPs.
+
+Exemplo:
+
+```txt
+google.com → 142.250.xxx.xxx
+```
+
+Sem DNS precisaríamos decorar IPs.
+
+
+# ============================== Função do DNS ==============================
+
+DNS funciona como:
+
+- agenda telefônica da internet
+- tradutor de domínio para IP
+
+Você digita:
+
+```txt
+https://google.com
+```
+
+O DNS encontra o IP do servidor.
+
+
+# ============================== Fluxo DNS ==============================
+
+1. Você digita um domínio
+
+```txt
+google.com
+```
+
+↓
+
+2. Navegador pergunta ao DNS
+
+```txt
+"Qual IP desse domínio?"
+```
+
+↓
+
+3. DNS responde
+
+```txt
+142.250.xxx.xxx
+```
+
+↓
+
+4. Navegador conecta no servidor
+
+
+# ============================== Exemplo Real ==============================
+
+Domínio:
+
+```txt
+github.com
+```
+
+DNS retorna:
+
+```txt
+140.82.xxx.xxx
+```
+
+Depois ocorre:
+- TCP
+- HTTPS
+- HTTP
+
+
+# ============================== Componentes do DNS ==============================
+
+# Domínio
+
+Nome do site.
+
+Exemplo:
+
+```txt
+google.com
+```
+
+---
+
+# Subdomínio
+
+Divisão do domínio.
+
+Exemplo:
+
+```txt
+api.google.com
+mail.google.com
+```
+
+---
+
+# TLD
+
+Parte final do domínio.
+
+Exemplos:
+
+```txt
+.com
+.org
+.net
+.com.br
+```
+
+---
+
+# Nameserver
+
+Servidor responsável pelo DNS.
+
+Exemplo:
+
+- Cloudflare
+- Google DNS
+
+
+# ============================== Tipos de Registros DNS ==============================
+
+# A Record
+
+Conecta domínio ao IPv4.
+
+Exemplo:
+
+```txt
+site.com → 192.168.0.1
+```
+
+---
+
+# AAAA Record
+
+Conecta domínio ao IPv6.
+
+---
+
+# CNAME
+
+Aponta domínio para outro domínio.
+
+Exemplo:
+
+```txt
+api.site.com → site.com
+```
+
+---
+
+# MX
+
+Servidor de e-mail.
+
+---
+
+# TXT
+
+Informações extras.
+
+Muito usado para:
+- verificação
+- SPF
+- segurança
+
+---
+
+# NS
+
+Define nameservers.
+
+
+# ============================== DNS Público ==============================
+
+# Google DNS
+
+```txt
+8.8.8.8
+8.8.4.4
+```
+
+---
+
+# Cloudflare DNS
+
+```txt
+1.1.1.1
+1.0.0.1
+```
+
+Muito rápido e popular.
+
+
+# ============================== Cache DNS ==============================
+
+O sistema guarda respostas DNS temporariamente.
+
+Isso deixa acesso mais rápido.
+
+Exemplo:
+
+```txt
+google.com → IP salvo temporariamente
+```
+
+
+# ============================== Porta DNS ==============================
+
+DNS normalmente usa:
+
+```txt
+Porta 53
+```
+
+Protocolos:
+- UDP
+- TCP
+
+
+# ============================== UDP no DNS ==============================
+
+DNS normalmente usa UDP porque:
+- é mais rápido
+- consulta pequena
+- menor latência
+
+
+# ============================== DNS na prática ==============================
+
+Fluxo completo:
+
+```txt
+1. Digita domínio
+2. DNS encontra IP
+3. TCP conecta
+4. HTTPS cria criptografia
+5. HTTP envia dados
+```
+
+
+# ============================== O que Hackers analisam ==============================
+
+- subdomínios
+- nameservers
+- registros TXT
+- DNS exposto
+- takeover de subdomínio
+- enumeração DNS
+- informações internas
+- vazamento de infraestrutura
+
+
+# ============================== Enumeração DNS ==============================
+
+Muito usada em pentest.
+
+Objetivo:
+descobrir subdomínios e infraestrutura.
+
+Exemplos:
+
+```txt
+api.site.com
+admin.site.com
+dev.site.com
+staging.site.com
+```
+
+Isso ajuda a encontrar superfícies de ataque.
+
+
+# ============================== Ferramentas ==============================
+
+# nslookup
+
+Consulta DNS.
+
+Exemplo:
+
+```bash
+nslookup google.com
+```
+
+---
+
+# dig
+
+Ferramenta avançada DNS.
+
+Exemplo:
+
+```bash
+dig google.com
+```
+
+---
+
+# whois
+
+Informações do domínio.
+
+---
+
+# Amass
+
+Enumeração de subdomínios.
+
+---
+
+# Subfinder
+
+Descoberta de subdomínios.
+
+
+# ============================== Conceitos Importantes ==============================
+
+# Resolução DNS
+
+Processo de encontrar IP.
+
+---
+
+# Resolver
+
+Servidor que faz consulta DNS.
+
+---
+
+# TTL
+
+Tempo de cache DNS.
+
+---
+
+# Propagação DNS
+
+Tempo para atualização espalhar pela internet.
+
+
+# ============================== DNS e Cibersegurança ==============================
+
+DNS é extremamente importante porque:
+
+- revela infraestrutura
+- expõe subdomínios
+- ajuda enumeração
+- participa do tráfego web
+- pode ser alvo de ataques
+
+Muito usado em:
+- recon
+- bug bounty
+- AppSec
+- pentest
+
+
+# ============================== Mentalidade ==============================
+
+Toda conexão web começa assim:
+
+Domínio
+↓
+DNS
+↓
+IP
+↓
+TCP
+↓
+HTTPS
+↓
+HTTP
+
+Quem domina DNS entende:
+- como sites são encontrados
+- como infraestrutura funciona
+- como hackers fazem enumeração
+- como APIs e servidores são descobertos

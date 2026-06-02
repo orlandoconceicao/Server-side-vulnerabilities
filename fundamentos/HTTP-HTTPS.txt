@@ -1,0 +1,358 @@
+# ============================== HTTP / HTTPS ==============================
+
+# O que é HTTP
+
+HTTP significa:
+
+HyperText Transfer Protocol
+
+É o protocolo usado para comunicação entre:
+
+- navegador
+- frontend
+- backend
+- APIs
+- aplicativos
+- servidores
+
+Quando você acessa um site, o navegador envia uma requisição HTTP.
+
+Exemplo:
+
+Cliente → Servidor
+Servidor → Cliente
+
+
+# ============================== Fluxo HTTP ==============================
+
+Cliente
+  ↓
+Requisição HTTP
+  ↓
+Servidor
+  ↓
+Resposta HTTP
+  ↓
+Cliente
+
+
+# ============================== Exemplo Real ==============================
+
+URL:
+
+https://google.com
+
+Requisição:
+
+```http
+GET / HTTP/1.1
+Host: google.com
+```
+
+Resposta:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: text/html
+```
+
+
+# ============================== Estrutura HTTP ==============================
+
+# 1. Método HTTP
+
+Define a ação da requisição.
+
+| Método | Função |
+|--------|--------|
+| GET    | Buscar dados |
+| POST   | Enviar dados |
+| PUT    | Atualizar |
+| PATCH  | Atualização parcial |
+| DELETE | Remover |
+
+---
+
+# GET
+
+```http
+GET /usuarios
+```
+
+Buscar informações.
+
+---
+
+# POST
+
+```http
+POST /login
+```
+
+Enviar informações.
+
+
+# ============================== Headers ==============================
+
+Headers são metadados da requisição.
+
+Exemplo:
+
+```http
+Content-Type: application/json
+Authorization: Bearer TOKEN
+Cookie: session=123
+```
+
+Muito importantes em segurança.
+
+
+# ============================== Body ==============================
+
+Corpo da requisição.
+
+Usado normalmente em:
+- POST
+- PUT
+- PATCH
+
+Exemplo:
+
+```json
+{
+  "email": "teste@gmail.com",
+  "senha": "123456"
+}
+```
+
+
+# ============================== Status Code ==============================
+
+Resposta do servidor.
+
+| Código | Significado |
+|--------|-------------|
+| 200 | Sucesso |
+| 201 | Criado |
+| 400 | Erro do cliente |
+| 401 | Não autenticado |
+| 403 | Proibido |
+| 404 | Não encontrado |
+| 500 | Erro do servidor |
+
+
+# ============================== HTTP ==============================
+
+HTTP puro:
+
+http://
+
+NÃO possui criptografia.
+
+Alguém pode interceptar:
+- senhas
+- cookies
+- tokens
+- dados
+
+
+# ============================== HTTPS ==============================
+
+HTTPS = HTTP + TLS/SSL
+
+Adiciona:
+
+- criptografia
+- integridade
+- autenticação
+
+
+# ============================== O que HTTPS protege ==============================
+
+# Criptografia
+
+Transforma dados em conteúdo ilegível.
+
+---
+
+# Integridade
+
+Impede alteração dos dados.
+
+---
+
+# Autenticação
+
+Confirma identidade do servidor.
+
+
+# ============================== Certificado SSL/TLS ==============================
+
+Emitido por autoridades certificadoras:
+
+- Let's Encrypt
+- Cloudflare
+- DigiCert
+
+Confirma que o domínio é legítimo.
+
+
+# ============================== Fluxo HTTPS ==============================
+
+1. Cliente conecta no servidor
+
+2. Servidor envia certificado TLS
+
+3. Navegador valida o certificado
+
+4. Chaves criptográficas são criadas
+
+5. Comunicação criptografada começa
+
+
+# ============================== HTTP vs HTTPS ==============================
+
+| HTTP             | HTTPS |
+|------------------|--------|
+| Sem criptografia | Criptografado |
+| Inseguro         | Seguro |
+| Porta 80         | Porta 443 |
+| Vulnerável       | Protegido |
+
+
+# ============================== Conceitos Importantes ==============================
+
+# Request
+
+Requisição enviada pelo cliente.
+
+---
+
+# Response
+
+Resposta enviada pelo servidor.
+
+---
+
+# Endpoint
+
+Rota da API.
+
+Exemplo:
+
+```txt
+/api/users
+```
+
+---
+
+# Header
+
+Metadados HTTP.
+
+---
+
+# Cookie
+
+Armazena sessão/login.
+
+---
+
+# Token
+
+Autenticação moderna.
+
+Exemplo:
+- JWT
+
+
+# ============================== O que Hackers analisam ==============================
+
+- headers
+- cookies
+- tokens
+- autenticação
+- parâmetros
+- endpoints
+- métodos HTTP
+- responses
+- CORS
+- JWT
+- APIs
+
+
+# ============================== Ferramenta Principal ==============================
+
+# Burp Suite
+
+Intercepta:
+
+Navegador ↔ Servidor
+
+Permite:
+- ver requests
+- alterar requests
+- estudar APIs
+- testar falhas
+- analisar autenticação
+
+
+# ============================== Exemplo Login ==============================
+
+```http
+POST /login
+```
+jdbc:postgresql://host:port/database?properties
+
+Body:
+
+```json
+{
+  "email": "admin@gmail.com",
+  "senha": "123456"
+}
+```
+
+Resposta:
+
+```json
+{
+  "token": "abc123"
+}
+```
+
+
+# ============================== Base da Cibersegurança Web ==============================
+
+Você precisa dominar:
+
+- métodos HTTP
+- headers
+- body
+- cookies
+- sessão
+- autenticação
+- request/response
+- status code
+
+Tudo em AppSec começa aqui.
+
+
+# ============================== Mentalidade ==============================
+
+Cibersegurança web é:
+
+entender profundamente como HTTP funciona.
+
+Quem domina HTTP entende:
+- APIs
+- JWT
+- OAuth
+- autenticação
+- Burp Suite
+- AppSec
+- SQL Injection
+- XSS
+- CSRF
+- SSRF
+- falhas web

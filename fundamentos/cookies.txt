@@ -1,0 +1,386 @@
+# ============================== COOKIES ==============================
+
+# O que são Cookies
+
+Cookies são pequenos dados armazenados no navegador.
+
+Eles servem para:
+
+- login
+- sessão
+- autenticação
+- preferências
+- rastreamento
+- carrinho de compras
+
+Sem cookies muitos sites não conseguiriam manter usuários logados.
+
+
+# ============================== Problema que Cookies resolvem ==============================
+
+HTTP é stateless.
+
+Ou seja:
+
+cada requisição é independente.
+
+Exemplo:
+
+```txt
+GET /perfil
+```
+
+O servidor não lembra automaticamente quem você é.
+
+Os cookies resolvem isso.
+
+
+# ============================== Funcionamento ==============================
+
+# 1. Usuário faz login
+
+Exemplo:
+
+```http
+POST /login
+```
+
+---
+
+# 2. Servidor cria sessão
+
+---
+
+# 3. Servidor envia cookie
+
+Exemplo:
+
+```http
+Set-Cookie: session=abc123
+```
+
+---
+
+# 4. Navegador salva cookie
+
+---
+
+# 5. Próximas requisições enviam cookie automaticamente
+
+Exemplo:
+
+```http
+Cookie: session=abc123
+```
+
+
+# ============================== Fluxo Completo ==============================
+
+```txt
+Login
+↓
+Servidor cria sessão
+↓
+Servidor envia cookie
+↓
+Navegador salva cookie
+↓
+Navegador envia cookie automaticamente
+↓
+Servidor identifica usuário
+```
+
+
+# ============================== Exemplo Real ==============================
+
+Resposta do servidor:
+
+```http
+HTTP/1.1 200 OK
+Set-Cookie: session=abc123
+```
+
+Próxima requisição:
+
+```http
+GET /dashboard
+Cookie: session=abc123
+```
+
+
+# ============================== Estrutura de um Cookie ==============================
+
+Exemplo:
+
+```http
+Set-Cookie: session=abc123; HttpOnly; Secure
+```
+
+Partes:
+- nome
+- valor
+- atributos
+
+
+# ============================== Principais Atributos ==============================
+
+# HttpOnly
+
+Impede acesso via JavaScript.
+
+Ajuda contra:
+- XSS
+
+---
+
+# Secure
+
+Cookie só funciona em HTTPS.
+
+---
+
+# SameSite
+
+Controla envio entre sites.
+
+Ajuda contra:
+- CSRF
+
+---
+
+# Expires
+
+Define validade.
+
+---
+
+# Path
+
+Define caminhos permitidos.
+
+
+# ============================== Tipos de Cookies ==============================
+
+# Session Cookie
+
+Existe enquanto navegador estiver aberto.
+
+---
+
+# Persistent Cookie
+
+Fica salvo até expirar.
+
+---
+
+# Authentication Cookie
+
+Usado em login/sessão.
+
+---
+
+# Tracking Cookie
+
+Usado para rastreamento.
+
+
+# ============================== Sessão ==============================
+
+Sessão normalmente funciona assim:
+
+```txt
+Cookie → ID da sessão → Dados no servidor
+```
+
+O cookie geralmente guarda apenas:
+- identificador
+
+Os dados reais ficam no backend.
+
+
+# ============================== Cookie vs JWT ==============================
+
+# Cookie tradicional
+
+Servidor guarda sessão.
+
+---
+
+# JWT
+
+Token guarda informações.
+
+Exemplo:
+
+```txt
+Authorization: Bearer TOKEN
+```
+
+Ambos são usados em autenticação.
+
+
+# ============================== Onde Cookies ficam ==============================
+
+Navegador:
+- Chrome
+- Firefox
+- Edge
+
+Podem ser vistos em:
+
+```txt
+DevTools → Application → Cookies
+```
+
+
+# ============================== O que Hackers analisam ==============================
+
+- cookies roubáveis
+- falta de HttpOnly
+- falta de Secure
+- sessão previsível
+- sequestro de sessão
+- session fixation
+- cookies expostos
+- CSRF
+- XSS
+
+
+# ============================== Session Hijacking ==============================
+
+Roubo de sessão.
+
+Se atacante obtiver:
+
+```txt
+session=abc123
+```
+
+Pode acessar conta da vítima.
+
+
+# ============================== XSS e Cookies ==============================
+
+Sem HttpOnly:
+
+JavaScript pode roubar cookie.
+
+Exemplo perigoso:
+
+```javascript
+document.cookie
+```
+
+Por isso HttpOnly é importante.
+
+
+# ============================== CSRF ==============================
+
+Browser envia cookies automaticamente.
+
+Isso pode permitir ataques CSRF.
+
+Exemplo:
+- ações sem autorização do usuário
+
+
+# ============================== Ferramentas ==============================
+
+# Burp Suite
+
+Permite:
+- ver cookies
+- editar cookies
+- analisar sessão
+
+---
+
+# DevTools
+
+Visualizar cookies no navegador.
+
+---
+
+# Wireshark
+
+Capturar tráfego de rede.
+
+
+# ============================== Conceitos Importantes ==============================
+
+# Stateless
+
+HTTP não lembra estado.
+
+---
+
+# Session ID
+
+Identificador da sessão.
+
+---
+
+# Authentication
+
+Verificação do usuário.
+
+---
+
+# Authorization
+
+Permissão do usuário.
+
+
+# ============================== Fluxo de Login Completo ==============================
+
+```txt
+Usuário faz login
+↓
+Servidor valida credenciais
+↓
+Servidor cria sessão
+↓
+Servidor envia cookie
+↓
+Browser salva cookie
+↓
+Browser envia cookie automaticamente
+↓
+Servidor reconhece usuário
+```
+
+
+# ============================== Cookies e Segurança ==============================
+
+Configuração segura normalmente usa:
+
+```http
+Set-Cookie:
+HttpOnly
+Secure
+SameSite
+```
+
+Muito importante em:
+- AppSec
+- APIs
+- autenticação
+- pentest web
+
+
+# ============================== Mentalidade ==============================
+
+Cookies são a base de:
+
+- login
+- sessão
+- autenticação web
+
+Quem domina cookies entende:
+- sessões
+- autenticação
+- CSRF
+- XSS
+- hijacking
+- segurança web
+- fluxo de login

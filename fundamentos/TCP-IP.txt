@@ -1,0 +1,395 @@
+# ============================== TCP/IP ==============================
+
+# O que é TCP/IP
+
+TCP/IP é o conjunto de protocolos que permite comunicação na internet.
+
+Praticamente toda comunicação da internet usa TCP/IP:
+
+- sites
+- APIs
+- aplicativos
+- jogos online
+- servidores
+- bancos
+- redes
+
+TCP/IP é a base da internet moderna.
+
+
+# ============================== Significado ==============================
+
+# TCP
+
+Transmission Control Protocol
+
+Responsável por:
+- conexão
+- entrega correta dos dados
+- organização
+- confiabilidade
+
+---
+
+# IP
+
+Internet Protocol
+
+Responsável por:
+- endereço dos dispositivos
+- roteamento
+- envio dos pacotes
+
+
+# ============================== Funcionamento Básico ==============================
+
+Exemplo:
+
+Seu navegador acessa:
+
+```txt
+https://google.com
+```
+
+Fluxo:
+
+```txt
+Aplicação
+↓
+TCP
+↓
+IP
+↓
+Internet
+↓
+Servidor
+```
+
+O servidor responde pelo mesmo caminho.
+
+
+# ============================== IP ==============================
+
+# O que é IP
+
+IP é o endereço do dispositivo na rede.
+
+Exemplo IPv4:
+
+```txt
+192.168.0.1
+```
+
+Cada dispositivo possui um IP.
+
+
+# ============================== IPv4 ==============================
+
+Formato:
+
+```txt
+192.168.1.10
+```
+
+4 blocos numéricos:
+- 0 até 255
+
+Muito usado atualmente.
+
+
+# ============================== IPv6 ==============================
+
+Nova versão do IP.
+
+Exemplo:
+
+```txt
+2001:0db8:85a3:0000:0000:8a2e:0370:7334
+```
+
+Criado porque os IPv4 estão acabando.
+
+
+# ============================== IP Público ==============================
+
+IP visível na internet.
+
+Exemplo:
+- roteador
+- VPS
+- servidor
+
+
+# ============================== IP Privado ==============================
+
+Usado dentro da rede local.
+
+Faixas comuns:
+
+```txt
+192.168.x.x
+10.x.x.x
+172.16.x.x
+```
+
+
+# ============================== TCP ==============================
+
+TCP garante:
+
+- entrega correta
+- ordem dos pacotes
+- conexão estável
+- retransmissão
+- controle de erro
+
+Muito usado em:
+- HTTPS
+- APIs
+- login
+- banco de dados
+
+
+# ============================== Pacotes ==============================
+
+Os dados são divididos em pequenos pedaços:
+
+```txt
+Pacote 1
+Pacote 2
+Pacote 3
+```
+
+O TCP reorganiza tudo corretamente.
+
+
+# ============================== Three-Way Handshake ==============================
+
+TCP cria conexão usando:
+
+1. SYN
+2. SYN-ACK
+3. ACK
+
+Fluxo:
+
+```txt
+Cliente → SYN
+Servidor → SYN-ACK
+Cliente → ACK
+```
+
+Conexão estabelecida.
+
+
+# ============================== Portas ==============================
+
+Portas identificam serviços.
+
+Exemplos:
+
+| Porta | Serviço    |
+|-------|------------|
+| 80    | HTTP       |
+| 443   | HTTPS      |
+| 22    | SSH        |
+| 21    | FTP        |
+| 3306  | MySQL      |
+| 5432  | PostgreSQL |
+
+
+# ============================== Exemplo ==============================
+
+Quando você acessa:
+
+```txt
+https://site.com
+```
+
+O navegador usa:
+
+```txt
+IP + Porta 443
+```
+
+Para encontrar o servidor.
+
+
+# ============================== DNS ==============================
+
+DNS converte domínio em IP.
+
+Exemplo:
+
+```txt
+google.com → 142.250.xxx.xxx
+```
+
+Sem DNS precisaríamos decorar IPs.
+
+
+# ============================== UDP ==============================
+
+Outro protocolo importante.
+
+UDP:
+- mais rápido
+- menos seguro
+- sem confirmação de entrega
+
+Usado em:
+- jogos
+- streaming
+- chamadas
+- vídeo ao vivo
+
+
+# ============================== TCP vs UDP ==============================
+
+| TCP            | UDP             |
+|----------------|-----------------|
+| confiável      | rápido          |
+| conexão        | sem conexão     |
+| confirmação    | sem confirmação |
+| mais lento     | mais rápido     |
+| usado em HTTPS | usado em jogos  |
+
+
+# ============================== Modelo TCP/IP ==============================
+
+# 1. Aplicação
+
+Exemplos:
+- HTTP
+- HTTPS
+- DNS
+
+---
+
+# 2. Transporte
+
+Exemplos:
+- TCP
+- UDP
+
+---
+
+# 3. Internet
+
+Exemplo:
+- IP
+
+---
+
+# 4. Rede
+
+Comunicação física da rede.
+
+
+# ============================== O que Hackers analisam ==============================
+
+- portas abertas
+- serviços vulneráveis
+- conexões TCP
+- tráfego de rede
+- pacotes
+- DNS
+- IPs expostos
+- protocolos inseguros
+
+
+# ============================== Ferramentas ==============================
+
+# Wireshark
+
+Analisa pacotes da rede.
+
+---
+
+# Nmap
+
+Escaneia:
+- portas
+- serviços
+- servidores
+
+---
+
+# Burp Suite
+
+Analisa HTTP/HTTPS.
+
+
+# ============================== Conceitos MUITO importantes ==============================
+
+# Host
+
+Dispositivo na rede.
+
+---
+
+# Porta
+
+Canal do serviço.
+
+---
+
+# Socket
+
+IP + Porta.
+
+Exemplo:
+
+```txt
+192.168.0.10:443
+```
+
+---
+
+# Cliente
+
+Quem faz requisição.
+
+---
+
+# Servidor
+
+Quem responde.
+
+
+# ============================== Base da Cibersegurança ==============================
+
+Quem domina TCP/IP entende:
+
+- redes
+- APIs
+- servidores
+- autenticação
+- tráfego
+- análise de pacotes
+- pentest
+- AppSec
+- infraestrutura
+- scanners
+- enumeração
+
+Tudo em segurança passa por TCP/IP.
+
+
+# ============================== Mentalidade ==============================
+
+A internet inteira funciona basicamente assim:
+
+Aplicação
+↓
+TCP
+↓
+IP
+↓
+Rede
+
+Entender TCP/IP é entender:
+- como dados viajam
+- como ataques acontecem
+- como servidores funcionam
+- como hackers analisam redes

@@ -1,0 +1,373 @@
+# ============================== CORS ==============================
+
+# O que é CORS
+
+CORS significa:
+
+Cross-Origin Resource Sharing
+
+É um mecanismo de segurança do navegador que controla quais sites podem acessar recursos de outros domínios.
+
+
+# ============================== Problema que o CORS resolve ==============================
+
+Por padrão, o navegador bloqueia requisições entre origens diferentes.
+
+Exemplo:
+
+```txt
+Frontend: https://site-a.com
+API:      https://api-site-b.com
+```
+
+O browser bloqueia isso automaticamente, a menos que o servidor permita.
+
+
+# ============================== O que é “Origin” ==============================
+
+Origin = combinação de:
+
+```txt
+protocolo + domínio + porta
+```
+
+Exemplo:
+
+```txt
+https://example.com:443
+```
+
+Mudou qualquer parte = origem diferente.
+
+
+# ============================== Same-Origin Policy ==============================
+
+É a regra base do navegador:
+
+> Um site não pode acessar dados de outro site diretamente
+
+Exemplo bloqueado:
+
+```txt
+site-a.com → site-b.com (bloqueado)
+```
+
+Isso protege contra ataques como:
+- roubo de dados
+- requisições maliciosas
+
+
+# ============================== Como o CORS funciona ==============================
+
+O servidor define quem pode acessar a API.
+
+
+# 1. Requisição do navegador
+
+```http
+GET /data
+Origin: https://site-a.com
+```
+
+---
+
+# 2. Servidor responde com header CORS
+
+```http
+Access-Control-Allow-Origin: https://site-a.com
+```
+
+
+# ============================== Se NÃO tiver CORS ==============================
+
+O navegador bloqueia:
+
+```txt
+❌ CORS Error
+```
+
+Mesmo que o servidor responda corretamente.
+
+
+# ============================== Exemplo real ==============================
+
+Frontend:
+
+```txt
+https://frontend.com
+```
+
+API:
+
+```txt
+https://api.com
+```
+
+Resposta da API:
+
+```http
+Access-Control-Allow-Origin: https://frontend.com
+```
+
+
+# ============================== Headers importantes do CORS ==============================
+
+# Access-Control-Allow-Origin
+
+Define quem pode acessar.
+
+Exemplo:
+
+```http
+Access-Control-Allow-Origin: *
+```
+
+OU
+
+```http
+Access-Control-Allow-Origin: https://site.com
+```
+
+---
+
+# Access-Control-Allow-Methods
+
+Define métodos permitidos.
+
+Exemplo:
+
+```http
+GET, POST, PUT, DELETE
+```
+
+---
+
+# Access-Control-Allow-Headers
+
+Define headers permitidos.
+
+Exemplo:
+
+```http
+Authorization, Content-Type
+```
+
+---
+
+# Access-Control-Allow-Credentials
+
+Permite envio de cookies.
+
+Exemplo:
+
+```http
+Access-Control-Allow-Credentials: true
+```
+
+
+# ============================== Preflight Request ==============================
+
+Antes de certas requisições, o browser faz um teste:
+
+```txt
+OPTIONS request
+```
+
+Exemplo:
+
+```http
+OPTIONS /api/data
+```
+
+Serve para verificar se o servidor permite a requisição.
+
+
+# ============================== Simple Request vs Preflight ==============================
+
+# Simple Request
+
+- GET
+- POST simples
+- sem headers especiais
+
+---
+
+# Preflight Request
+
+- PUT, DELETE
+- Authorization header
+- JSON customizado
+
+
+# ============================== CORS e Cookies ==============================
+
+Para enviar cookies:
+
+```http
+Access-Control-Allow-Credentials: true
+```
+
+E no frontend:
+
+```js
+fetch(url, {
+  credentials: "include"
+})
+```
+
+
+# ============================== CORS ERRORS ==============================
+
+Erro comum:
+
+```txt
+Blocked by CORS policy
+```
+
+Significa:
+- servidor não liberou origem
+
+
+# ============================== CORS e Segurança ==============================
+
+CORS NÃO é proteção do servidor.
+
+É proteção do navegador.
+
+Isso é importante:
+
+- API pode responder
+- mas o browser bloqueia acesso
+
+
+# ============================== O que Hackers analisam ==============================
+
+- Access-Control-Allow-Origin: *
+- CORS mal configurado
+- uso de credentials com *
+- bypass de origem
+- APIs abertas
+- endpoints sensíveis expostos
+- preflight mal configurado
+
+
+# ============================== CORS VULNERABILITY ==============================
+
+Erro crítico:
+
+```http
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+```
+
+Isso pode permitir:
+- roubo de dados autenticados
+
+
+# ============================== Exemplo perigoso ==============================
+
+```http
+Access-Control-Allow-Origin: attacker.com
+Access-Control-Allow-Credentials: true
+```
+
+Se mal configurado:
+- atacante pode ler dados da vítima
+
+
+# ============================== Ferramentas ==============================
+
+# Burp Suite
+
+- testar CORS
+- modificar origin
+- interceptar preflight
+
+---
+
+# DevTools
+
+- ver headers
+- analisar erros
+
+
+# ============================== CORS na prática ==============================
+
+Frontend React:
+
+```js
+fetch("https://api.com/data", {
+  method: "GET",
+  credentials: "include"
+})
+```
+
+
+# ============================== Conceitos importantes ==============================
+
+# Origin
+
+Identidade do site.
+
+---
+
+# Policy
+
+Regras do navegador.
+
+---
+
+# Header
+
+Controle do servidor.
+
+---
+
+# Preflight
+
+Teste antes da requisição.
+
+
+# ============================== Fluxo Web com CORS ==============================
+
+```txt
+DNS
+↓
+TCP/IP
+↓
+HTTPS
+↓
+HTTP Request
+↓
+CORS Check (browser)
+↓
+API Response
+↓
+Browser libera ou bloqueia
+```
+
+
+# ============================== CORS e Cibersegurança ==============================
+
+CORS é muito importante em:
+
+- APIs
+- frontend moderno (React, Vue, Angular)
+- autenticação
+- sistemas com cookies
+- pentest web
+- bug bounty
+
+
+# ============================== Mentalidade ==============================
+
+CORS não bloqueia o servidor.
+
+Ele protege o navegador.
+
+Quem domina CORS entende:
+- APIs modernas
+- frontend/backend separation
+- segurança de browser
+- autenticação com cookies
+- ataques cross-origin

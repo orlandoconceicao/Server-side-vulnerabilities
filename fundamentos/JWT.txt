@@ -1,0 +1,441 @@
+# ============================== JWT ==============================
+
+# O que é JWT
+
+JWT significa:
+
+JSON Web Token
+
+É um token usado para:
+- autenticação
+- autorização
+- APIs
+- login
+- sistemas modernos
+
+Muito usado em:
+- React
+- APIs REST
+- mobile
+- microserviços
+- OAuth2
+
+
+# ============================== Objetivo do JWT ==============================
+
+Permitir que o usuário permaneça autenticado sem precisar armazenar sessão tradicional no servidor.
+
+JWT normalmente é:
+- stateless
+- portátil
+- assinado digitalmente
+
+
+# ============================== Fluxo Básico ==============================
+
+# 1. Usuário faz login
+
+```http
+POST /login
+```
+
+---
+
+# 2. Servidor valida usuário
+
+---
+
+# 3. Servidor gera JWT
+
+---
+
+# 4. Servidor envia token
+
+Exemplo:
+
+```json
+{
+  "token": "eyJhbGciOi..."
+}
+```
+
+---
+
+# 5. Cliente salva token
+
+---
+
+# 6. Próximas requests enviam token
+
+```http
+Authorization: Bearer TOKEN
+```
+
+---
+
+# 7. Servidor valida token
+
+
+# ============================== Fluxo Completo ==============================
+
+```txt
+Login
+↓
+Servidor valida usuário
+↓
+Servidor cria JWT
+↓
+Cliente recebe token
+↓
+Cliente envia token nas requests
+↓
+Servidor valida token
+↓
+Usuário autenticado
+```
+
+
+# ============================== Estrutura do JWT ==============================
+
+JWT possui 3 partes:
+
+```txt
+HEADER.PAYLOAD.SIGNATURE
+```
+
+Exemplo:
+
+```txt
+xxxxx.yyyyy.zzzzz
+```
+
+
+# ============================== Header ==============================
+
+Contém:
+- algoritmo
+- tipo do token
+
+Exemplo:
+
+```json
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+```
+
+
+# ============================== Payload ==============================
+
+Contém informações do usuário.
+
+Exemplo:
+
+```json
+{
+  "id": 1,
+  "email": "admin@gmail.com",
+  "role": "admin"
+}
+```
+
+IMPORTANTE:
+payload NÃO é criptografado.
+
+Apenas codificado.
+
+
+# ============================== Signature ==============================
+
+Assinatura digital.
+
+Serve para:
+- impedir alteração
+- validar autenticidade
+
+Criada usando:
+- secret key
+- algoritmo
+
+
+# ============================== Exemplo JWT ==============================
+
+```txt
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+.
+eyJpZCI6MSwicm9sZSI6ImFkbWluIn0
+.
+abc123assinatura
+```
+
+
+# ============================== Authorization Header ==============================
+
+JWT normalmente é enviado assim:
+
+```http
+Authorization: Bearer TOKEN
+```
+
+Exemplo:
+
+```http
+Authorization: Bearer eyJhbGciOi...
+```
+
+
+# ============================== Stateless ==============================
+
+JWT geralmente é stateless.
+
+Ou seja:
+- servidor não guarda sessão
+- token contém informações
+
+Isso facilita:
+- escalabilidade
+- microserviços
+- APIs
+
+
+# ============================== Expiração ==============================
+
+JWT normalmente possui:
+
+```json
+{
+  "exp": 9999999999
+}
+```
+
+Define tempo de validade.
+
+
+# ============================== Refresh Token ==============================
+
+Usado para gerar novo access token.
+
+Fluxo comum:
+
+```txt
+Access Token → curta duração
+Refresh Token → longa duração
+```
+
+Muito usado em:
+- apps modernos
+- OAuth2
+
+
+# ============================== JWT vs Sessão ==============================
+
+# Sessão Tradicional
+
+Servidor guarda sessão.
+
+```txt
+Cookie → Session ID → Backend
+```
+
+---
+
+# JWT
+
+Token guarda dados.
+
+```txt
+Cliente → JWT → Servidor
+```
+
+
+# ============================== Onde JWT é armazenado ==============================
+
+# LocalStorage
+
+Muito usado.
+
+Porém vulnerável a:
+- XSS
+
+---
+
+# Cookie HttpOnly
+
+Mais seguro.
+
+Muito recomendado.
+
+
+# ============================== O que Hackers analisam ==============================
+
+- assinatura fraca
+- segredo exposto
+- algoritmo inseguro
+- token sem expiração
+- JWT no LocalStorage
+- role manipulation
+- vazamento de token
+- JWT mal validado
+
+
+# ============================== JWT NONE Attack ==============================
+
+Falha antiga.
+
+Servidor aceitava:
+
+```json
+{
+  "alg": "none"
+}
+```
+
+Sem assinatura.
+
+Muito famosa em AppSec.
+
+
+# ============================== Role Manipulation ==============================
+
+Payload pode ser visualizado.
+
+Exemplo:
+
+```json
+{
+  "role": "user"
+}
+```
+
+Atacante tenta alterar para:
+
+```json
+{
+  "role": "admin"
+}
+```
+
+Assinatura correta impede isso.
+
+
+# ============================== JWT NÃO criptografa ==============================
+
+JWT padrão:
+- NÃO criptografa
+- apenas codifica Base64
+
+Nunca colocar:
+- senha
+- dados sensíveis
+- segredos
+
+
+# ============================== Boas Práticas ==============================
+
+- usar HTTPS
+- expiração curta
+- segredo forte
+- validar assinatura
+- usar HttpOnly
+- usar refresh token
+- validar algoritmo
+- evitar LocalStorage
+
+
+# ============================== Ferramentas ==============================
+
+# Burp Suite
+
+Analisar:
+- JWT
+- autenticação
+- headers
+
+---
+
+# jwt.io
+
+Decodificar JWT.
+
+---
+
+# Postman
+
+Testar APIs autenticadas.
+
+
+# ============================== Conceitos Importantes ==============================
+
+# Authentication
+
+Verifica identidade.
+
+---
+
+# Authorization
+
+Define permissões.
+
+---
+
+# Bearer Token
+
+Token enviado no header.
+
+---
+
+# Claims
+
+Informações dentro do payload.
+
+
+# ============================== JWT e APIs ==============================
+
+Muito usado em:
+- React + API
+- Django REST
+- Node.js
+- mobile
+- microsserviços
+
+Fluxo comum moderno:
+- login
+- JWT
+- API autenticada
+
+
+# ============================== Fluxo Web Completo ==============================
+
+```txt
+DNS
+↓
+TCP/IP
+↓
+HTTPS
+↓
+HTTP
+↓
+JWT
+↓
+Autenticação
+↓
+Autorização
+```
+
+
+# ============================== Mentalidade ==============================
+
+JWT é basicamente:
+
+"um documento assinado que prova quem você é"
+
+Quem domina JWT entende:
+- autenticação moderna
+- APIs
+- OAuth2
+- AppSec
+- segurança web
+- tokens
+- autorização
+- fluxo de login moderno

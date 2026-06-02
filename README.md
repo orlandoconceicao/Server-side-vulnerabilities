@@ -86,4 +86,3 @@ Entender vulnerabilidade
 Backend developer + AppSec learner (iniciante)
 
 📧 orlandoconceicao94@gmail.com
-```

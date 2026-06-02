@@ -1,0 +1,439 @@
+# ============================== OAuth2 ==============================
+
+# O que é OAuth2
+
+OAuth2 é um protocolo de autorização.
+
+Serve para permitir que aplicativos acessem recursos de um usuário sem compartilhar senha.
+
+Muito usado em:
+
+- Login com Google
+- Login com GitHub
+- Login com Facebook
+- APIs modernas
+- aplicativos mobile
+- microsserviços
+
+
+# ============================== Objetivo do OAuth2 ==============================
+
+Permitir acesso controlado sem entregar credenciais.
+
+Exemplo:
+
+```txt
+"Entrar com Google"
+```
+
+Você NÃO entrega sua senha Google ao site.
+
+O Google autentica você.
+
+
+# ============================== Diferença Importante ==============================
+
+# Authentication
+
+Quem você é.
+
+Exemplo:
+- login
+
+---
+
+# Authorization
+
+O que você pode acessar.
+
+OAuth2 é principalmente:
+- autorização
+
+
+# ============================== Participantes do OAuth2 ==============================
+
+# Resource Owner
+
+Usuário.
+
+---
+
+# Client
+
+Aplicação.
+
+Exemplo:
+- site
+- app
+
+---
+
+# Authorization Server
+
+Servidor que autentica.
+
+Exemplo:
+- Google
+- GitHub
+
+---
+
+# Resource Server
+
+API protegida.
+
+
+# ============================== Fluxo Básico OAuth2 ==============================
+
+# 1. Usuário clica:
+
+```txt
+Entrar com Google
+```
+
+---
+
+# 2. Aplicação redireciona usuário
+
+```txt
+app → Google
+```
+
+---
+
+# 3. Usuário faz login no Google
+
+---
+
+# 4. Google pede permissão
+
+Exemplo:
+
+```txt
+Permitir acesso ao email?
+```
+
+---
+
+# 5. Usuário aceita
+
+---
+
+# 6. Google retorna Authorization Code
+
+---
+
+# 7. Aplicação troca código por token
+
+---
+
+# 8. API recebe Access Token
+
+---
+
+# 9. Usuário autenticado
+
+
+# ============================== Fluxo Completo ==============================
+
+```txt
+Usuário
+↓
+Aplicação
+↓
+Google OAuth
+↓
+Authorization Code
+↓
+Access Token
+↓
+API protegida
+```
+
+
+# ============================== Access Token ==============================
+
+Token usado para acessar API.
+
+Exemplo:
+
+```http
+Authorization: Bearer TOKEN
+```
+
+Possui:
+- curta duração
+
+
+# ============================== Refresh Token ==============================
+
+Usado para gerar novo access token.
+
+Possui:
+- duração maior
+
+
+# ============================== Authorization Code ==============================
+
+Código temporário usado no fluxo mais seguro.
+
+Muito usado em:
+- aplicações web
+- mobile
+
+
+# ============================== Scopes ==============================
+
+Scopes definem permissões.
+
+Exemplo:
+
+```txt
+email
+profile
+read:user
+```
+
+Controle do que aplicação pode acessar.
+
+
+# ============================== Exemplo Real ==============================
+
+Aplicação solicita:
+
+```txt
+Acesso ao email do usuário
+```
+
+Usuário aceita.
+
+OAuth2 gera token com permissão limitada.
+
+
+# ============================== OAuth2 NÃO é login ==============================
+
+OAuth2 é:
+- autorização
+
+Login geralmente usa:
+- OpenID Connect (OIDC)
+
+OIDC = camada de identidade sobre OAuth2.
+
+
+# ============================== OpenID Connect ==============================
+
+OIDC adiciona:
+- autenticação
+- identidade do usuário
+
+Muito usado com:
+- Google Login
+- Auth0
+- Keycloak
+
+
+# ============================== Tipos de Fluxo OAuth2 ==============================
+
+# Authorization Code Flow
+
+Mais seguro.
+
+Mais usado atualmente.
+
+---
+
+# Client Credentials
+
+Comunicação servidor ↔ servidor.
+
+---
+
+# Device Flow
+
+TVs e dispositivos limitados.
+
+---
+
+# PKCE
+
+Proteção extra para mobile/SPA.
+
+Muito importante atualmente.
+
+
+# ============================== PKCE ==============================
+
+Protege Authorization Code Flow.
+
+Muito usado em:
+- React
+- mobile
+- SPA
+
+Ajuda contra:
+- interception attack
+
+
+# ============================== O que Hackers analisam ==============================
+
+- redirect_uri insegura
+- token leakage
+- falta de validação state
+- scopes excessivos
+- OAuth misconfiguration
+- access token exposto
+- open redirect
+- PKCE ausente
+
+
+# ============================== Redirect URI ==============================
+
+Define para onde OAuth redireciona.
+
+Exemplo:
+
+```txt
+https://app.com/callback
+```
+
+Validação incorreta pode gerar:
+- takeover
+- roubo de token
+
+
+# ============================== State Parameter ==============================
+
+Proteção importante contra:
+- CSRF
+
+Exemplo:
+
+```txt
+state=abc123
+```
+
+
+# ============================== OAuth2 e APIs ==============================
+
+Muito usado em:
+- APIs REST
+- microsserviços
+- cloud
+- aplicações modernas
+
+Exemplo:
+- Google APIs
+- GitHub APIs
+
+
+# ============================== JWT no OAuth2 ==============================
+
+Access Tokens muitas vezes usam:
+- JWT
+
+Então OAuth2 e JWT normalmente aparecem juntos.
+
+
+# ============================== Ferramentas ==============================
+
+# Burp Suite
+
+Analisar:
+- OAuth flow
+- redirects
+- tokens
+
+---
+
+# Postman
+
+Testar APIs OAuth2.
+
+---
+
+# jwt.io
+
+Visualizar tokens JWT.
+
+
+# ============================== Conceitos Importantes ==============================
+
+# Access Token
+
+Token temporário de acesso.
+
+---
+
+# Refresh Token
+
+Gera novo token.
+
+---
+
+# Scope
+
+Permissão do token.
+
+---
+
+# Consent
+
+Permissão do usuário.
+
+---
+
+# Callback URL
+
+URL de retorno OAuth.
+
+
+# ============================== Fluxo Web Completo ==============================
+
+```txt
+DNS
+↓
+TCP/IP
+↓
+HTTPS
+↓
+HTTP
+↓
+OAuth2
+↓
+JWT
+↓
+API protegida
+```
+
+
+# ============================== OAuth2 e Cibersegurança ==============================
+
+OAuth2 é extremamente importante em:
+- AppSec
+- APIs
+- autenticação moderna
+- cloud
+- mobile
+- pentest web
+
+Muito explorado em:
+- bug bounty
+- testes de autenticação
+- APIs
+
+
+# ============================== Mentalidade ==============================
+
+OAuth2 basicamente faz:
+
+"autorizar aplicações sem compartilhar senha"
+
+Quem domina OAuth2 entende:
+- login moderno
+- APIs
+- autenticação federada
+- JWT
+- autorização
+- segurança de APIs
+- AppSec moderno

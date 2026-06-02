@@ -1,0 +1,406 @@
+# ============================== SESSÃO (SESSION) ==============================
+
+# O que é Sessão
+
+Sessão é o mecanismo usado para manter um usuário autenticado entre várias requisições HTTP.
+
+HTTP é stateless.
+
+Ou seja:
+
+o servidor não lembra automaticamente quem você é.
+
+A sessão resolve isso.
+
+
+# ============================== Problema ==============================
+
+Exemplo:
+
+```http
+GET /perfil
+```
+
+O servidor recebe apenas a requisição.
+
+Sem sessão:
+- usuário pareceria "novo" em toda request
+- login não funcionaria corretamente
+
+
+# ============================== Objetivo da Sessão ==============================
+
+Permitir que o servidor:
+
+- reconheça usuário
+- mantenha login
+- controle autenticação
+- mantenha estado temporário
+
+
+# ============================== Funcionamento Básico ==============================
+
+# 1. Usuário faz login
+
+Exemplo:
+
+```http
+POST /login
+```
+
+---
+
+# 2. Servidor valida credenciais
+
+---
+
+# 3. Servidor cria sessão
+
+Exemplo:
+
+```txt
+session_id = abc123
+```
+
+---
+
+# 4. Sessão é salva no backend
+
+Exemplo:
+- memória
+- Redis
+- banco de dados
+
+---
+
+# 5. Servidor envia cookie
+
+```http
+Set-Cookie: session=abc123
+```
+
+---
+
+# 6. Navegador salva cookie
+
+---
+
+# 7. Próximas requests enviam cookie automaticamente
+
+```http
+Cookie: session=abc123
+```
+
+---
+
+# 8. Servidor identifica usuário pela sessão
+
+
+# ============================== Fluxo Completo ==============================
+
+```txt
+Usuário faz login
+↓
+Servidor valida login
+↓
+Servidor cria sessão
+↓
+Servidor salva sessão
+↓
+Servidor envia cookie
+↓
+Browser salva cookie
+↓
+Browser envia cookie automaticamente
+↓
+Servidor identifica usuário
+```
+
+
+# ============================== Estrutura da Sessão ==============================
+
+# Cookie
+
+Guarda:
+- identificador da sessão
+
+Exemplo:
+
+```txt
+session=abc123
+```
+
+---
+
+# Backend
+
+Guarda:
+- usuário
+- permissões
+- autenticação
+- dados temporários
+
+
+# ============================== Exemplo Real ==============================
+
+Resposta:
+
+```http
+HTTP/1.1 200 OK
+Set-Cookie: session=abc123
+```
+
+Próxima request:
+
+```http
+GET /dashboard
+Cookie: session=abc123
+```
+
+Servidor:
+
+```txt
+session abc123 → usuário autenticado
+```
+
+
+# ============================== Sessão no Backend ==============================
+
+Exemplo:
+
+```json
+{
+  "session_id": "abc123",
+  "usuario": "admin",
+  "role": "admin"
+}
+```
+
+
+# ============================== Sessão vs JWT ==============================
+
+# Sessão Tradicional
+
+Servidor guarda estado.
+
+```txt
+Cookie → Session ID → Dados no servidor
+```
+
+---
+
+# JWT
+
+Token guarda informações diretamente.
+
+```txt
+Authorization: Bearer TOKEN
+```
+
+JWT normalmente é stateless.
+
+
+# ============================== Sessão Expirada ==============================
+
+Sessões possuem tempo limite.
+
+Exemplo:
+- 30 minutos
+- 24 horas
+
+Depois disso:
+- usuário precisa logar novamente
+
+
+# ============================== Logout ==============================
+
+Logout normalmente:
+
+- remove sessão do backend
+- invalida cookie
+
+
+# ============================== Atributos importantes ==============================
+
+# HttpOnly
+
+Impede acesso via JavaScript.
+
+Ajuda contra:
+- XSS
+
+---
+
+# Secure
+
+Cookie apenas via HTTPS.
+
+---
+
+# SameSite
+
+Ajuda contra:
+- CSRF
+
+
+# ============================== O que Hackers analisam ==============================
+
+- session hijacking
+- session fixation
+- cookies inseguros
+- sessões previsíveis
+- falta de expiração
+- reutilização de sessão
+- falta de HttpOnly
+- falta de Secure
+
+
+# ============================== Session Hijacking ==============================
+
+Roubo da sessão.
+
+Se atacante roubar:
+
+```txt
+session=abc123
+```
+
+Pode assumir conta da vítima.
+
+
+# ============================== Session Fixation ==============================
+
+Atacante força vítima usar sessão conhecida.
+
+Muito importante em AppSec.
+
+
+# ============================== Sessão Segura ==============================
+
+Boa prática:
+
+```http
+Set-Cookie:
+HttpOnly
+Secure
+SameSite
+```
+
+Além disso:
+- IDs aleatórios
+- expiração curta
+- HTTPS obrigatório
+
+
+# ============================== Onde Sessões são armazenadas ==============================
+
+# Memória
+
+Simples porém limitada.
+
+---
+
+# Redis
+
+Muito usado em produção.
+
+---
+
+# Banco de Dados
+
+Persistência maior.
+
+
+# ============================== Ferramentas ==============================
+
+# Burp Suite
+
+Permite:
+- analisar sessão
+- editar cookies
+- testar autenticação
+
+---
+
+# DevTools
+
+Ver cookies e armazenamento.
+
+---
+
+# Wireshark
+
+Capturar tráfego.
+
+
+# ============================== Conceitos Importantes ==============================
+
+# Authentication
+
+Confirma identidade.
+
+---
+
+# Authorization
+
+Controla permissões.
+
+---
+
+# Stateless
+
+Sem memória entre requests.
+
+---
+
+# Stateful
+
+Mantém estado/sessão.
+
+
+# ============================== Fluxo Web Completo ==============================
+
+```txt
+DNS
+↓
+TCP/IP
+↓
+HTTPS
+↓
+HTTP
+↓
+Cookie
+↓
+Sessão
+↓
+Autenticação
+```
+
+
+# ============================== Sessão e Cibersegurança ==============================
+
+Sessão é uma das partes mais críticas da segurança web.
+
+Muito explorada em:
+- pentest
+- bug bounty
+- AppSec
+- autenticação
+- APIs
+
+
+# ============================== Mentalidade ==============================
+
+Sessão é basicamente:
+
+"como o servidor lembra quem você é"
+
+Quem domina sessões entende:
+- login
+- autenticação
+- cookies
+- CSRF
+- XSS
+- hijacking
+- segurança web
+- fluxo de autenticação

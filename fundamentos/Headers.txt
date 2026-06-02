@@ -1,0 +1,362 @@
+# ============================== HEADERS HTTP ==============================
+
+# O que são Headers
+
+Headers são informações adicionais enviadas em requisições e respostas HTTP.
+
+Eles não são o “conteúdo” principal (body), mas dizem como a comunicação deve funcionar.
+
+
+# ============================== Onde os headers aparecem ==============================
+
+Em requisições:
+
+```http
+GET /api/users HTTP/1.1
+Host: site.com
+Authorization: Bearer TOKEN
+```
+
+Em respostas:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+Set-Cookie: session=abc123
+```
+
+
+# ============================== Função dos Headers ==============================
+
+Headers servem para:
+
+- autenticação
+- segurança
+- controle de cache
+- tipo de conteúdo
+- cookies
+- CORS
+- controle de sessão
+- comportamento da requisição
+
+
+# ============================== Estrutura ==============================
+
+```txt
+Nome: Valor
+```
+
+Exemplo:
+
+```http
+Content-Type: application/json
+```
+
+
+# ============================== Headers mais importantes ==============================
+
+# ============================== 1. Authorization ==============================
+
+Usado para autenticação.
+
+Exemplo:
+
+```http
+Authorization: Bearer eyJhbGciOi...
+```
+
+Muito usado com:
+- JWT
+- OAuth2
+
+
+# ============================== 2. Content-Type ==============================
+
+Define o tipo de dados enviados.
+
+Exemplo:
+
+```http
+Content-Type: application/json
+```
+
+Outros exemplos:
+- text/html
+- application/xml
+- multipart/form-data
+
+
+# ============================== 3. Accept ==============================
+
+Define o que o cliente aceita receber.
+
+Exemplo:
+
+```http
+Accept: application/json
+```
+
+
+# ============================== 4. Cookie ==============================
+
+Envia cookies para o servidor.
+
+Exemplo:
+
+```http
+Cookie: session=abc123
+```
+
+Usado para:
+- login
+- sessão
+
+
+# ============================== 5. Set-Cookie ==============================
+
+Servidor cria cookie.
+
+Exemplo:
+
+```http
+Set-Cookie: session=abc123; HttpOnly; Secure
+```
+
+
+# ============================== 6. User-Agent ==============================
+
+Identifica o cliente.
+
+Exemplo:
+
+```http
+User-Agent: Mozilla/5.0 Chrome/...
+```
+
+Pode ser usado para:
+- detecção de navegador
+- análise de tráfego
+
+
+# ============================== 7. Host ==============================
+
+Define o domínio acessado.
+
+Exemplo:
+
+```http
+Host: google.com
+```
+
+
+# ============================== 8. Origin ==============================
+
+Usado em CORS.
+
+Exemplo:
+
+```http
+Origin: https://site.com
+```
+
+
+# ============================== 9. Access-Control-* ==============================
+
+Usado em CORS.
+
+Exemplo:
+
+```http
+Access-Control-Allow-Origin: https://site.com
+Access-Control-Allow-Credentials: true
+```
+
+
+# ============================== 10. Cache-Control ==============================
+
+Controla cache.
+
+Exemplo:
+
+```http
+Cache-Control: no-cache
+```
+
+
+# ============================== Tipos de Headers ==============================
+
+# Headers de Requisição
+
+Enviados pelo cliente.
+
+Ex:
+- Authorization
+- Cookie
+- Accept
+
+
+# Headers de Resposta
+
+Enviados pelo servidor.
+
+Ex:
+- Set-Cookie
+- Content-Type
+
+
+# Headers Gerais
+
+Usados em ambos.
+
+Ex:
+- Date
+- Connection
+
+
+# ============================== Headers e Segurança ==============================
+
+Headers são fundamentais para segurança web.
+
+Eles controlam:
+
+- autenticação
+- sessão
+- cookies seguros
+- CORS
+- proteção contra ataques
+
+
+# ============================== Headers críticos de segurança ==============================
+
+# Strict-Transport-Security (HSTS)
+
+Força HTTPS.
+
+```http
+Strict-Transport-Security: max-age=31536000
+```
+
+---
+
+# Content-Security-Policy (CSP)
+
+Protege contra XSS.
+
+```http
+Content-Security-Policy: script-src 'self'
+```
+
+---
+
+# X-Frame-Options
+
+Protege contra clickjacking.
+
+```http
+X-Frame-Options: DENY
+```
+
+---
+
+# X-Content-Type-Options
+
+Evita MIME sniffing.
+
+```http
+X-Content-Type-Options: nosniff
+```
+
+
+# ============================== O que Hackers analisam ==============================
+
+- tokens em Authorization
+- cookies inseguros
+- falta de HttpOnly
+- headers de CORS mal configurados
+- CSP fraca ou inexistente
+- vazamento de informações em headers
+- endpoints expostos
+- user-agent bypass
+- cache inseguro
+
+
+# ============================== Headers e APIs ==============================
+
+APIs modernas dependem fortemente de headers:
+
+Exemplo:
+
+```http
+GET /users
+Authorization: Bearer TOKEN
+Content-Type: application/json
+```
+
+
+# ============================== Headers na prática ==============================
+
+Exemplo completo:
+
+```http
+POST /login HTTP/1.1
+Host: site.com
+Content-Type: application/json
+Accept: application/json
+User-Agent: Chrome
+Origin: https://site.com
+
+{
+  "email": "user@gmail.com",
+  "senha": "123456"
+}
+```
+
+
+# ============================== Ferramentas ==============================
+
+# Burp Suite
+- interceptar headers
+- modificar requests
+- testar autenticação
+
+# DevTools
+- ver requests
+- analisar cookies e headers
+
+# curl
+- testar APIs via terminal
+
+
+# ============================== Fluxo Web com Headers ==============================
+
+```txt
+DNS
+↓
+TCP/IP
+↓
+HTTPS
+↓
+HTTP Request (Headers + Body)
+↓
+Servidor processa
+↓
+HTTP Response (Headers + Body)
+↓
+Browser interpreta
+```
+
+
+# ============================== Mentalidade ==============================
+
+Headers são:
+
+"as instruções invisíveis da comunicação web"
+
+Quem domina headers entende:
+- autenticação
+- APIs
+- cookies
+- sessão
+- CORS
+- segurança web
+- ataques em aplicações
