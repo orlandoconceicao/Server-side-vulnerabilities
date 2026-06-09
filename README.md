@@ -20,7 +20,7 @@ O objetivo é entender como falhas em aplicações web podem ser exploradas na p
 - [✔] Burp Suite (Base)
 - [✔] Information Disclosure (Source Code / JavaScript)
 - [✔] Path Traversal (leitura de arquivos como /etc/passwd)
-
+- [✔] Broken Access Control (Cookie manipulável)7
 
 ---
 
