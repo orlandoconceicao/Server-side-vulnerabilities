@@ -7,9 +7,9 @@
 
 ## 💡 Sobre o projeto
 
-Este repositório documenta meus estudos práticos em vulnerabilidades do lado do servidor, utilizando a Web Security Academy da :contentReference[oaicite:0]{index=0}.
+Este repositório documenta meus estudos práticos em vulnerabilidades do lado do servidor, utilizando a Web Security Academy da PortSwigger.
 
-O objetivo é entender como falhas em aplicações web podem ser exploradas na prática usando ferramentas como o :contentReference[oaicite:1]{index=1}.
+O objetivo é entender como falhas em aplicações web podem ser exploradas na prática usando ferramentas como o Burp Suite.
 
 ---
 
