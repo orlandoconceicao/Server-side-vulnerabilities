@@ -1,11 +1,11 @@
 
-# 🛡️ Server-side Vulnerabilities Lab Project
+# Server-side Vulnerabilities Lab Project
 
-🌐 **Plataforma de estudo:** https://portswigger.net/web-security
+**Plataforma de estudo:** https://portswigger.net/web-security
 
 ---
 
-## 💡 Sobre o projeto
+## Sobre o projeto
 
 Este repositório documenta meus estudos práticos em vulnerabilidades do lado do servidor, utilizando a Web Security Academy da PortSwigger.
 
@@ -13,9 +13,9 @@ O objetivo é entender como falhas em aplicações web podem ser exploradas na p
 
 ---
 
-## 📈 Progresso
+## Progresso
 
-### 🔹 Server-side vulnerabilities
+### Server-side vulnerabilities
 
 - [✔] Burp Suite (Base)
 - [✔] Information Disclosure (Source Code / JavaScript)
@@ -25,7 +25,7 @@ O objetivo é entender como falhas em aplicações web podem ser exploradas na p
 
 ---
 
-## 🎯 Objetivo
+## Objetivo
 
 Aprender na prática como identificar, explorar e entender vulnerabilidades server-side como:
 
@@ -37,7 +37,7 @@ Aprender na prática como identificar, explorar e entender vulnerabilidades serv
 
 ---
 
-## 🧠 O que estou aprendendo
+## O que estou aprendendo
 
 - Como aplicações web processam requisições HTTP  
 - Como identificar parâmetros vulneráveis  
@@ -47,7 +47,7 @@ Aprender na prática como identificar, explorar e entender vulnerabilidades serv
 
 ---
 
-## 🛠️ Ferramentas utilizadas
+## Ferramentas utilizadas
 
 - Burp Suite  
 - Browser (Chrome / Burp Browser)  
@@ -56,7 +56,7 @@ Aprender na prática como identificar, explorar e entender vulnerabilidades serv
 
 ---
 
-## 🚀 Fluxo de estudo
+## Fluxo de estudo
 
 ```
 Abrir lab
@@ -74,16 +74,16 @@ Entender vulnerabilidade
 
 ---
 
-## 💬 Aprendizado principal
+## Aprendizado principal
 
 > Segurança web não é sobre “hackear”, e sim entender como a aplicação funciona e onde ela confia demais no usuário.
 
 ---
 
-## 👨‍💻 Autor
+## Autor
 
 **Orlando Conceição**  
 
 Fullstack developer + AppSec learner (iniciante)
 
-📧 orlandoconceicao94@gmail.com
+gmail: orlandoconceicao94@gmail.com
