@@ -86,4 +86,4 @@ Entender vulnerabilidade
 
 Fullstack developer + AppSec learner (iniciante)
 
-gmail: orlandoconceicao94@gmail.com
+contato: orlandoconceicao94@gmail.com
